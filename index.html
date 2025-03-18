@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Amigo Secreto</title>
+</head>
+<body>
+
+<div class="main-content">
+    <div class="header-banner">
+        <h1 class="main-title">Lista de Amigos</h1>
+    </div>
+    <div class="input-section">
+        <h2 class="section-title">Adicione um nome:</h2>
+        <div class="input-wrapper">
+            <input type="text" id="nomeInput" class="input-title" placeholder="Digite um nome">
+            <button class="button-add" onclick="adicionarNome()">Adicionar</button>
+        </div>
+        <ul id="listaNomes"></ul>
+        <button class="button-draw" onclick="sortearNome()">🎲 Sortear Nome</button>
+        <p id="resultadoSorteio" class="result-list"></p>
+    </div>
+</div>
+
+<script>
+    let nomes = [];
+
+    function adicionarNome() {
+        let nomeInput = document.getElementById("nomeInput");
+        let nome = nomeInput.value.trim();
+
+        if (nome === "") {
+            alert("Por favor, insira um nome.");
+            return;
+        }
+
+        nomes.push(nome);
+        atualizarLista();
+        nomeInput.value = "";
+    }
+
+    function atualizarLista() {
+        let lista = document.getElementById("listaNomes");
+        lista.innerHTML = "";
+        
+        nomes.forEach(nome => {
+            let li = document.createElement("li");
+            li.textContent = nome;
+            lista.appendChild(li);
+        });
+    }
+
+    function sortearNome() {
+        if (nomes.length === 0) {
+            alert("A lista está vazia. Adicione nomes antes de sortear.");
+            return;
+        }
+
+        let indiceSorteado = Math.floor(Math.random() * nomes.length);
+        let nomeSorteado = nomes[indiceSorteado];
+        document.getElementById("resultadoSorteio").textContent = "Nome sorteado: " + nomeSorteado;
+    }
+</script>
+</body>
+</html>"
